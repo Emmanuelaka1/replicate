@@ -1,0 +1,133 @@
+request CodeBoite{}
+
+response CodeBoite[
+{
+"replication": {
+"boite": "DDDD"
+},
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 4
+},{
+"replication": {
+"boite": "CCCC"
+},
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 2
+},{
+"replication": {
+"boite": "BBBB"
+},
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 1
+},{
+"replication": {
+"boite": "AAAA"
+},
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 1
+}
+]
+
+resquest APP{
+codeBoite": "DDDD",
+"app": "cardvirtrplsource",
+"db": ""
+"schema" : ""
+"support":
+"typeSupport": ""
+}
+
+response APP{
+"replication": {
+'boite": "DDDD"
+'app": "cardvirtrplsource",
+"supportType": "DB2MVS",
+"database": "LOCDV0O"
+},
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 4
+}
+
+resquest DB{
+"codeBoite": "DDDD",
+"app": "cardvirtrplsource",
+"db": "LOCDVOO",
+"schema" : "",
+'support": ,
+"typeSupport": "DB2MVS"
+}
+
+response DB[
+{
+"replication": {
+'boite": "DDDD",
+"app": "cardvirtrplsource",
+"supportType": "DB2MVS",
+"database": "LOCDV0O",
+"schema": "VO1DBA"
+},
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 2
+},
+{
+"replication": {
+"boite": "DDDD"
+"app": "cardvirtrplsource",
+"supportType": "DB2MVS",
+"database": "LOCDVOO"
+"schema": "V03DBA"
+},
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 2
+}
+
+Request Schemas{
+"codeBoite": "DDDD",
+"app": "cardvirtrolsource",
+"db": "LOCDV00",
+"schema": "VO1DBA",
+"support",
+"typeSupport": "DB2MVS"
+}
+
+Response Schemas [
+{
+"replication": {
+'id": 26,
+'boite": "DDDD",
+app": "cardvirtrplsource",
+"supportConceptuel": "T05CARV",
+"table": "T05CARV",
+supportType": "DB2MVS",
+"database": "LOCDV00",
+schema" : "VO1DBA"
+}
+"clientType": "SOURCE",
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+count": 1
+},
+{
+"replication": {
+"id": 27,
+"boite": "DDDD",
+"app": "cardvirtrplsource",
+"supportConceptuel": "T05PARV",
+"table": "T05PARV",
+"supportType": "DB2MVS",
+"database": "LOCDVOO",
+"schema": "V01DBA",
+},
+"clientType": "SOURCE",
+"statuses":["ACTIVE"],
+"clientTypes": ["SOURCE"],
+"count": 1
+}
+]

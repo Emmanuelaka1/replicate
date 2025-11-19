@@ -68,6 +68,7 @@ resolve(this.children)
 }
 
     initData(resolve: (data: ReportModel[]) => void, typeSearch: string) {
+        console.log('initData typeSearch : ', typeSearch)
         this.initCriteria(this.criteria, typeSearch)
         const reportsRes = api.reportApi.findReports(this.criteria)
         reportsRes.then((d: Response) => d.json())

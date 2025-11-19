@@ -75,7 +75,7 @@
               />
               <spaceButton v-else />
               <reportButton
-                v-if="scope.row.hasChildren"
+                v-if="scope.row instanceof ReplicationStatusReportModel || scope.row instanceof ReportApp"
                 title-btn="Dupliquer"
                 type-btn="primary"
                 icon-btn="DocumentCopy"
@@ -122,6 +122,15 @@
     </el-dialog>
     <el-dialog v-model="duplicatePopUp" title="Duplication" width="30%" center>
       <span id="centerContent">Voulez-vous dupliquer cet élément et tous ses enfants ?</span>
+      <el-form label-position="top" style="margin-top: 20px">
+        <el-form-item label="Libellé de la copie">
+          <el-input 
+            v-model="duplicateLabel" 
+            placeholder="Entrez le libellé pour la copie"
+            clearable
+          />
+        </el-form-item>
+      </el-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="duplicatePopUp = false">Annuler</el-button>
@@ -153,6 +162,7 @@ const infoSearch = ref({} as ReportCriteriaDto)
 const border = ref(true)
 const confirmPopUp = ref(false)
 const duplicatePopUp = ref(false)
+const duplicateLabel = ref('')
 const selectedReplication = ref({} as ReportModel)
 const rplToDuplicate = ref({} as ReportModel)
 const rplToDel = ref([] as ReplicationAndStatusDto[])
@@ -296,6 +306,7 @@ function toUpdateReplication(row: ReportModel) {
 
 function toDuplicateReplication(row: ReportModel) {
   rplToDuplicate.value = row
+  duplicateLabel.value = `${row.label} (copie)`
   duplicatePopUp.value = true
 }
 
@@ -371,6 +382,11 @@ function onDuplicateConfirm() {
 
     // Dupliquer l'élément et l'ajouter à la liste
     const duplicatedReport = duplicateReport(rplToDuplicate.value)
+    
+    // Appliquer le libellé personnalisé si fourni
+    if (duplicateLabel.value && duplicateLabel.value.trim() !== '') {
+      duplicatedReport.label = duplicateLabel.value.trim()
+    }
     
     // Fonction récursive pour trouver le parent et insérer la copie au bon endroit
     const findAndInsert = (items: ReportModel[]): boolean => {
